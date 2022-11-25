@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:y86_simulator/pages/settings.dart';
 import 'package:y86_simulator/widgets/bottom_bar.dart';
 
@@ -10,8 +11,8 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   static final Map<String, Widget Function(BuildContext)> routes = {
-    '/home':(BuildContext context) => const MyHomePage(),
-    '/settings':(BuildContext context)=> const SettingsPage()
+    '/home':(BuildContext context) => DefaultAssetBundle(bundle: rootBundle, child: const MyHomePage()),
+    '/settings':(BuildContext context)=> DefaultAssetBundle(bundle: rootBundle, child: const SettingsPage()),
   };
 
   @override
