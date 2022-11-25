@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:y86_simulator/widgets/bottom_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,10 +37,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Y86 Simulator"),
+        centerTitle: false,
       ),
       body: Center(
         child: const Text("我爱金城"),
-      )
+      ),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }
