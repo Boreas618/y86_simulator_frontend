@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:y86_simulator/pages/settings.dart';
 import 'package:y86_simulator/widgets/bottom_bar.dart';
 
 void main() {
@@ -8,6 +9,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  static final Map<String, Widget Function(BuildContext)> routes = {
+    '/home':(BuildContext context) => const MyHomePage(),
+    '/settings':(BuildContext context)=> const SettingsPage()
+  };
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,15 +22,15 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green)
       ),
-      home: const MyHomePage(title: 'Y86 Simulator'),
+      initialRoute: '/home',
+      routes: routes,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key});
 
-  final String title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();

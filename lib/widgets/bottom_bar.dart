@@ -10,11 +10,11 @@ class BottomBar extends StatefulWidget{
 class _BottomBarState extends State<BottomBar> {
 
   void onHomePressed(){
-    return;
+    Navigator.pushNamed(context, '/home');
   }
 
   void onSettingsPressed(){
-    return;
+    Navigator.pushNamed(context, '/settings');
   }
 
   @override
