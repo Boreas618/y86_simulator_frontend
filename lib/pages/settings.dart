@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/bottom_bar.dart';
-
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
@@ -10,6 +8,17 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+
+  void onFileTilePressed() async{
+    String? rawString = await showDialog(
+        context: context,
+        builder: (_)=>Dialog(
+          child: Center(
+            child: Text("Dialog"),
+          ),
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +27,17 @@ class _SettingsPageState extends State<SettingsPage> {
         centerTitle: false,
       ),
       body: Center(
-        child: const Text("我爱ICS"),
+        child: ListView(
+          children: [
+            Card(
+              child: ListTile(
+                onTap: onFileTilePressed,
+                title: const Text("Selected File"),
+                subtitle: Text("./A.json"),
+              )
+            )
+          ],
+        )
       ),
     );
   }
