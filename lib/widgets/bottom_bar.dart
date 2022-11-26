@@ -9,10 +9,6 @@ class BottomBar extends StatefulWidget{
 
 class _BottomBarState extends State<BottomBar> {
 
-  void onHomePressed(){
-    Navigator.pushNamed(context, '/home');
-  }
-
   void onSettingsPressed(){
     Navigator.pushNamed(context, '/settings');
   }
@@ -22,10 +18,6 @@ class _BottomBarState extends State<BottomBar> {
     return BottomAppBar(
       child: Row(
         children: [
-          IconButton(
-            icon: const Icon(Icons.home),
-            onPressed: onHomePressed,
-          ),
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: onSettingsPressed,
