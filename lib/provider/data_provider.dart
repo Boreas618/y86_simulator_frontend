@@ -19,4 +19,12 @@ class DataProvider {
     
     return dataPaths;
   }
+
+  static Future<String> loadData(String? path) async {
+    if(path == null) {
+      return "";
+    }
+    String rawData =  await rootBundle.loadString(path);
+    return rawData;
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:y86_simulator/provider/settings_provider.dart';
 
 class BottomBar extends StatefulWidget{
   const BottomBar({super.key});
@@ -21,7 +22,11 @@ class _BottomBarState extends State<BottomBar> {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: onSettingsPressed,
-          )
+          ),
+          Expanded(
+              child: ListTile(
+                title: Text(SettingsProvider.getInstance().selected_file_path),
+              ))
         ],
       ),
     );

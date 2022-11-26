@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:y86_simulator/provider/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../provider/data_provider.dart';
 
@@ -10,25 +14,32 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-
-  void onFileTilePressed() async{
+  void onFileTilePressed() async {
+    SettingsProvider settingsProvider = SettingsProvider.getInstance();
     List<String> dataPaths = await DataProvider.loadFileList();
-    String? rawString = await showDialog(
+    String? path = await showDialog(
         context: context,
-        builder: (ctx)=>AlertDialog(
-          title: const Text("Select a file to visualize"),
-          content: Column(
-            children: dataPaths.map((e) => ListTile(title: Text(e))).toList(),
-          ),
-          actions: [
-            TextButton(
-                onPressed: () => Navigator.pop(ctx),
-                child: Text("cancel")),
-            TextButton(
-                onPressed: (){},
-                child: Text("ok"))
-          ],
-        ));
+        builder: (ctx) => AlertDialog(
+              title: const Text("Select a file to visualize"),
+              content: Column(
+                children: dataPaths
+                    .map(
+                      (e) => ListTile(
+                          title: Text(e),
+                          onTap: () async{
+                            Navigator.pop(ctx, e);
+                          }),
+                    )
+                    .toList(),
+              ),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.pop(ctx, settingsProvider.selected_file_path),
+                    child: const Text("cancel")),
+              ],
+            ));
+    settingsProvider.selected_file_path = path;
+    settingsProvider.rawData = await DataProvider.loadData(path);
   }
 
   @override
@@ -39,18 +50,16 @@ class _SettingsPageState extends State<SettingsPage> {
         centerTitle: false,
       ),
       body: Center(
-        child: ListView(
-          children: [
-            Card(
+          child: ListView(
+        children: [
+          Card(
               child: ListTile(
-                onTap: onFileTilePressed,
-                title: const Text("Selected File"),
-                subtitle: Text("./A.json"),
-              )
-            )
-          ],
-        )
-      ),
+            onTap: onFileTilePressed,
+            title: const Text("Selected File"),
+            subtitle: Text(SettingsProvider.getInstance().selected_file_path),
+          ))
+        ],
+      )),
     );
   }
 }

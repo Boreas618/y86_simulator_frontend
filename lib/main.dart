@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:y86_simulator/pages/settings.dart';
+import 'package:y86_simulator/provider/settings_provider.dart';
 import 'package:y86_simulator/widgets/bottom_bar.dart';
 
 void main() {
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = SettingsProvider.getInstance()..init();
     return MaterialApp(
       title: 'Y86 Simulator',
       theme: ThemeData(
