@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:y86_simulator/pages/settings.dart';
 import 'package:y86_simulator/providers/settings_provider.dart';
-import 'package:y86_simulator/utils/frame_controller.dart';
 import 'package:y86_simulator/widgets/bottom_bar.dart';
 import './pages/main_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  SettingsProvider.getInstance().init();
   runApp(const MyApp());
 }
 
@@ -27,8 +25,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(
-            value: SettingsProvider.getInstance()),
-        ChangeNotifierProvider.value(value: FrameController.getInstance()),
+            value: SettingsProvider.getInstance()..init()),
       ],
       child: MaterialApp(
         title: 'Y86 Simulator',
@@ -51,13 +48,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  FrameController frameController = FrameController.getInstance();
-
-  void nextFrame(){
-    setState(() {
-      frameController.currentFrame++;
-    });
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: false,
       ),
       body: Center(
-        child: MainPage(frameController:frameController),
+        child: MainPage(),
       ),
       bottomNavigationBar: BottomBar(),
     );

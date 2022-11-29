@@ -16,6 +16,8 @@ class SettingsProvider extends ChangeNotifier {
 
   static const String KEY_SELECTED_FILE_PATH = "selected_file_path";
   static const String KEY_RAW_DATA = "raw_data";
+  static const String KEY_CURRENT_FRAME = "current_frame";
+  static const String KEY_NUMBER_OF_FRAMES = "number_of_frames";
 
   Future<void> init() async =>
       sharedPreferences = await SharedPreferences.getInstance();
@@ -54,6 +56,38 @@ class SettingsProvider extends ChangeNotifier {
       sharedPreferences!.setString(KEY_RAW_DATA, data);
     } else if(sharedPreferences!.containsKey(KEY_RAW_DATA)){
       sharedPreferences!.remove(KEY_RAW_DATA);
+    }
+    notifyListeners();
+  }
+
+  int get currentFrame {
+    if(sharedPreferences!.containsKey(KEY_CURRENT_FRAME)){
+      return sharedPreferences!.getInt(KEY_CURRENT_FRAME) ?? 0;
+    }
+    return 0;
+  }
+
+  set currentFrame(int? data){
+    if(data != null){
+      sharedPreferences!.setInt(KEY_CURRENT_FRAME, data);
+    } else if(sharedPreferences!.containsKey(KEY_CURRENT_FRAME)){
+      sharedPreferences!.remove(KEY_CURRENT_FRAME);
+    }
+    notifyListeners();
+  }
+
+  int get numberOfFrames {
+    if(sharedPreferences!.containsKey(KEY_NUMBER_OF_FRAMES)){
+      return sharedPreferences!.getInt(KEY_NUMBER_OF_FRAMES) ?? 0;
+    }
+    return 0;
+  }
+
+  set numberOfFrames(int? data){
+    if(data != null){
+      sharedPreferences!.setInt(KEY_NUMBER_OF_FRAMES, data);
+    } else if(sharedPreferences!.containsKey(KEY_NUMBER_OF_FRAMES)){
+      sharedPreferences!.remove(KEY_NUMBER_OF_FRAMES);
     }
     notifyListeners();
   }
