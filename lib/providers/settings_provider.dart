@@ -3,6 +3,10 @@ import 'package:y86_simulator/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsProvider extends ChangeNotifier {
+
+  //新建一个状态条目的方法
+  //仿照之前的写法写get和set
+
   //The constructor method
   SettingsProvider._();
 
