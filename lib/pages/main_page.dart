@@ -13,40 +13,39 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  late List<dynamic> frames;
+  late String rawData;
+
+  void initState() {
+    super.initState();
+    rawData = context.read<SettingsProvider>().rawData;
+    frames = jsonDecode(rawData);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<SettingsProvider>().numberOfFrames = frames.length;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<SettingsProvider>(builder: (_, settingsProvider, __) {
-      String rawData = settingsProvider.rawData;
-      List<dynamic> frames = jsonDecode(rawData);
-      context.read<SettingsProvider>().numberOfFrames = frames.length;
-      print(frames[context.read<SettingsProvider>().currentFrame]['REG']
-          .keys
-          .toList());
-      return SingleChildScrollView(
+    return SingleChildScrollView(
         child: Row(
-          children: [
-            Flexible(
-                flex: 1,
-                child: Container(
-                  child: Column(
-                    children: frames[context.read<SettingsProvider>().currentFrame]
-                    ['REG']
-                        .keys
-                        .toList()
-                        .map((e) => DataItem(
-                        e,
-                        frames[context.read<SettingsProvider>().currentFrame]
-                        ['REG'][e]))
-                        .toList()
-                        .cast<Widget>(),
-                  ),
-                )),
-            Flexible(
-                flex: 3,
-                child: Container())
-          ],
-        )
-      );
-    });
+      children: [
+        Flexible(
+            flex: 1,
+            child: Column(
+              children: frames[context.read<SettingsProvider>().currentFrame]
+                      ['REG']
+                  .keys
+                  .toList()
+                  .map((e) => DataItem(
+                      e,
+                      frames[context.read<SettingsProvider>().currentFrame]
+                          ['REG'][e]))
+                  .toList()
+                  .cast<Widget>(),
+            )),
+        Flexible(flex: 3, child: Container())
+      ],
+    ));
   }
 }

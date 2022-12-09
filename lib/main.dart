@@ -7,7 +7,10 @@ import './pages/main_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SettingsProvider.getInstance().init().then((value) {
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -32,13 +35,12 @@ class MyApp extends StatelessWidget {
     //状态管理参考https://flutter.cn/docs/development/data-and-backend/state-mgmt/simple
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(
-            value: SettingsProvider.getInstance()..init()),
+        ChangeNotifierProvider.value(value: SettingsProvider.getInstance()),
       ],
       child: MaterialApp(
         title: 'Y86 Simulator',
         theme: ThemeData(
-          //这里面主要配置了App的一些主题参数
+            //这里面主要配置了App的一些主题参数
             useMaterial3: true,
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.green)),
         //初始界面：home，参考上面定义的routes
@@ -58,7 +60,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     //这里面就是主页的主要成份

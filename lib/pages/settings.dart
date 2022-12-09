@@ -14,7 +14,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-
   //这是一个回调函数，当设置中的那一项被单击时调用这一函数
   void onFileTilePressed() async {
     //获取存储状态的实例，即instance，可以给我们提供状态信息
@@ -36,25 +35,24 @@ class _SettingsPageState extends State<SettingsPage> {
               content: Column(
                 children: dataPaths
                     .map(
-                      (e) =>
-                      ListTile(
+                      (e) => ListTile(
                           title: Text(e),
                           //点击文件列表的某一个文件，关闭对话框，返回路径信息
                           onTap: () async {
                             //关闭对话框，返回路径信息
                             Navigator.pop(ctx, e);
                           }),
-                )
+                    )
                     .toList(),
               ),
               actions: [
                 TextButton(
                     onPressed: () =>
-                        Navigator.pop(ctx, settingsProvider.selected_file_path),
+                        Navigator.pop(ctx, settingsProvider.selectedFilePath),
                     child: const Text("cancel")),
               ],
             ));
-    settingsProvider.selected_file_path = path;
+    settingsProvider.selectedFilePath = path;
     settingsProvider.rawData = await DataProvider.loadData(path);
   }
 
@@ -67,18 +65,17 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       body: Center(
           child: ListView(
-            children: [
-              Card(
-                  child: ListTile(
-                      onTap: onFileTilePressed,
-                      title: const Text("Selected File"),
-                      subtitle: Consumer<SettingsProvider>(
-                          builder: (_, settingsProvider, __) =>
-                              Text(settingsProvider.selected_file_path) ,
-                      )
-                  ))
-            ],
-          )),
+        children: [
+          Card(
+              child: ListTile(
+                  onTap: onFileTilePressed,
+                  title: const Text("Selected File"),
+                  subtitle: Consumer<SettingsProvider>(
+                    builder: (_, settingsProvider, __) =>
+                        Text(settingsProvider.selectedFilePath),
+                  )))
+        ],
+      )),
     );
   }
 }

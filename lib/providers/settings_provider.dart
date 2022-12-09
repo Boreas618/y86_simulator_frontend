@@ -3,7 +3,6 @@ import 'package:y86_simulator/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsProvider extends ChangeNotifier {
-
   //新建一个状态条目的方法
   //仿照之前的写法写get和set
 
@@ -23,10 +22,11 @@ class SettingsProvider extends ChangeNotifier {
   static const String KEY_CURRENT_FRAME = "current_frame";
   static const String KEY_NUMBER_OF_FRAMES = "number_of_frames";
 
-  Future<void> init() async =>
-      sharedPreferences = await SharedPreferences.getInstance();
+  Future<void> init() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+  }
 
-  String get selected_file_path {
+  String get selectedFilePath {
     if (sharedPreferences!.containsKey(KEY_SELECTED_FILE_PATH)) {
       String? filename = sharedPreferences!.getString(KEY_SELECTED_FILE_PATH);
       if (filename == null) {
@@ -39,58 +39,58 @@ class SettingsProvider extends ChangeNotifier {
     return "";
   }
 
-  set selected_file_path(String? filename) {
-    if(filename != null){
+  set selectedFilePath(String? filename) {
+    if (filename != null) {
       sharedPreferences!.setString(KEY_SELECTED_FILE_PATH, filename!);
-    } else if(sharedPreferences!.containsKey(KEY_SELECTED_FILE_PATH)){
+    } else if (sharedPreferences!.containsKey(KEY_SELECTED_FILE_PATH)) {
       sharedPreferences!.remove(KEY_SELECTED_FILE_PATH);
     }
     notifyListeners();
   }
 
   String get rawData {
-    if(sharedPreferences!.containsKey(KEY_RAW_DATA)){
+    if (sharedPreferences!.containsKey(KEY_RAW_DATA)) {
       return sharedPreferences!.getString(KEY_RAW_DATA) ?? "[]";
     }
     return "[]";
   }
 
-  set rawData(String? data){
-    if(data != null){
+  set rawData(String? data) {
+    if (data != null) {
       sharedPreferences!.setString(KEY_RAW_DATA, data);
-    } else if(sharedPreferences!.containsKey(KEY_RAW_DATA)){
+    } else if (sharedPreferences!.containsKey(KEY_RAW_DATA)) {
       sharedPreferences!.remove(KEY_RAW_DATA);
     }
     notifyListeners();
   }
 
   int get currentFrame {
-    if(sharedPreferences!.containsKey(KEY_CURRENT_FRAME)){
+    if (sharedPreferences!.containsKey(KEY_CURRENT_FRAME)) {
       return sharedPreferences!.getInt(KEY_CURRENT_FRAME) ?? 0;
     }
     return 0;
   }
 
-  set currentFrame(int? data){
-    if(data != null){
+  set currentFrame(int? data) {
+    if (data != null) {
       sharedPreferences!.setInt(KEY_CURRENT_FRAME, data);
-    } else if(sharedPreferences!.containsKey(KEY_CURRENT_FRAME)){
+    } else if (sharedPreferences!.containsKey(KEY_CURRENT_FRAME)) {
       sharedPreferences!.remove(KEY_CURRENT_FRAME);
     }
     notifyListeners();
   }
 
   int get numberOfFrames {
-    if(sharedPreferences!.containsKey(KEY_NUMBER_OF_FRAMES)){
+    if (sharedPreferences!.containsKey(KEY_NUMBER_OF_FRAMES)) {
       return sharedPreferences!.getInt(KEY_NUMBER_OF_FRAMES) ?? 0;
     }
     return 0;
   }
 
-  set numberOfFrames(int? data){
-    if(data != null){
+  set numberOfFrames(int? data) {
+    if (data != null) {
       sharedPreferences!.setInt(KEY_NUMBER_OF_FRAMES, data);
-    } else if(sharedPreferences!.containsKey(KEY_NUMBER_OF_FRAMES)){
+    } else if (sharedPreferences!.containsKey(KEY_NUMBER_OF_FRAMES)) {
       sharedPreferences!.remove(KEY_NUMBER_OF_FRAMES);
     }
     notifyListeners();
