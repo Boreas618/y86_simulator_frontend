@@ -73,7 +73,13 @@ class _SettingsPageState extends State<SettingsPage> {
                   subtitle: Consumer<SettingsProvider>(
                     builder: (_, settingsProvider, __) =>
                         Text(settingsProvider.selectedFilePath),
-                  )))
+                  ))),
+          Card(
+            child: ListTile(
+              title: const Text("About"),
+              subtitle: const Text("年少时诋毁Flutter，年轻时理解Flutter，长大后成为Flutter developer。"),
+            ),
+          )
         ],
       )),
     );

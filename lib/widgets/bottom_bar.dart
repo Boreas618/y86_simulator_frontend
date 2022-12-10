@@ -19,7 +19,7 @@ class _BottomBarState extends State<BottomBar> {
     return BottomAppBar(
       child: Row(
         children: [
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Consumer<SettingsProvider>(
@@ -33,8 +33,9 @@ class _BottomBarState extends State<BottomBar> {
                 if (context.read<SettingsProvider>().currentFrame == 0) {
                   context.read<SettingsProvider>().currentFrame =
                       context.read<SettingsProvider>().numberOfFrames - 1;
+                } else {
+                  context.read<SettingsProvider>().currentFrame -= 1;
                 }
-                context.read<SettingsProvider>().currentFrame -= 1;
               },
               icon: const Icon(Icons.arrow_back)),
           IconButton(
@@ -42,8 +43,9 @@ class _BottomBarState extends State<BottomBar> {
                 if (context.read<SettingsProvider>().currentFrame ==
                     context.read<SettingsProvider>().numberOfFrames - 1) {
                   context.read<SettingsProvider>().currentFrame = 0;
+                } else {
+                  context.read<SettingsProvider>().currentFrame += 1;
                 }
-                context.read<SettingsProvider>().currentFrame += 1;
               },
               icon: const Icon(Icons.arrow_forward)),
           IconButton(
