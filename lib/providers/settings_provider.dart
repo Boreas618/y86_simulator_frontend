@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:y86_simulator/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsProvider extends ChangeNotifier {
@@ -40,7 +39,7 @@ class SettingsProvider extends ChangeNotifier {
 
   set selectedFilePath(String? filename) {
     if (filename != null) {
-      sharedPreferences!.setString(KEY_SELECTED_FILE_PATH, filename!);
+      sharedPreferences!.setString(KEY_SELECTED_FILE_PATH, filename);
     } else if (sharedPreferences!.containsKey(KEY_SELECTED_FILE_PATH)) {
       sharedPreferences!.remove(KEY_SELECTED_FILE_PATH);
     }
