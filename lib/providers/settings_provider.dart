@@ -30,10 +30,9 @@ class SettingsProvider extends ChangeNotifier {
     if (sharedPreferences!.containsKey(KEY_SELECTED_FILE_PATH)) {
       String? filename = sharedPreferences!.getString(KEY_SELECTED_FILE_PATH);
       if (filename == null) {
-        return Constant.base_path;
+        return "";
       } else {
-        return Constant.base_path +
-            sharedPreferences!.getString(KEY_SELECTED_FILE_PATH)!;
+        return sharedPreferences!.getString(KEY_SELECTED_FILE_PATH)!;
       }
     }
     return "";
